@@ -1,31 +1,12 @@
-# Read the data file
-filename = "data/wxobs20170821.txt"
-
-#datafile = open(filename, 'r')
-
-# read just a few lines
-#print(datafile.readline())
-#print(datafile.readline())
-#print(datafile.readline())
-#print(datafile.readline())
-
-# read the entire file
-#data = datafile.read()
-#datafile.close()
-
-# Read the data file (indent with four spaces on the 2nd line)
-#   this will automatically close the file when it's done reading
-#   BEST TO USE SPACES INSTEAD OF TABS
-#with open(filename, 'r') as datafile:
-#   data = datafile.read()
-
-# DEBUG
-#print(data)
-#print(type(data))
-
-#####################################################################
 # Initialize my data variable (create an empty list variable)
-data = []
+#data = []    # declare data to be an empty list
+#data = {}    # declare data to be a dictionary
+
+# create some empty lists within our dictionary
+# Initialize my data variable
+data = {'date': [],
+  'time': [],
+  'tempout': []}   # list[0] vs dict['key'] --> data['tempout']
 
 # Read and parse the data file
 filename = "data/wxobs20170821.txt"
@@ -37,14 +18,14 @@ with open(filename, 'r') as datafile:
 
  # Read and parse the rest of the file
  for line in datafile:
-    datum = line.split()   # split on whitespace.  could use line.split(',') for comma-delimted
-    data.append(datum)
+    #datum = line.split()   # split on whitespace.  could use line.split(',') for comma-delimted
+    split_line = line.split()
+    data['date'].append(split_line[0])
+    data['time'].append(split_line[1])
+    data['tempout'].append(split_line[2])
 
 # DEBUG
-#print(data[9])
-#print(data[-1])
-#print(data[:10])
-#print(data[::2])   # print every other line
-print(data[0])
-print(data[0][4])   # print the 5th element of the first list element (object?)
+print(data['tempout'][9])
+print(type(data['time']))    
+print(type(data['tempout']))    
    
