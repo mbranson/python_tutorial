@@ -18,14 +18,15 @@ with open(filename, 'r') as datafile:
 
  # Read and parse the rest of the file
  for line in datafile:
-    #datum = line.split()   # split on whitespace.  could use line.split(',') for comma-delimted
-    split_line = line.split()
-    data['date'].append(split_line[0])
-    data['time'].append(split_line[1])
-    data['tempout'].append(split_line[2])
+    datum = line.split()
+    data['date'].append(datum[0])
+    data['time'].append(datum[1])
+    data['tempout'].append(datum[2])
+    #data['tempout'].append(float(datum[2]))
 
 # DEBUG
-print(data['tempout'][9])
+print(data['tempout'][0:9])
 print(type(data['time']))    
-print(type(data['tempout']))    
+print(type(data['tempout'][9]))    
+
    
