@@ -1,8 +1,9 @@
 # Column names and column indices to read
-columns = {'date': 0, 'time': 1, 'tempout': 2, 'windspeed': 7}
+columns = {'date': 0, 'time': 1, 'tempout': 2, 'windspeed': 7,
+           'windchill': 12}
 
 # Data types for each column (only if non-string)
-types = {'tempout': float, 'windspeed': float}
+types = {'tempout': float, 'windspeed': float, 'windchill': float}
 
 # Initialize my data variable
 data = {}
@@ -29,13 +30,14 @@ with open(filename, 'r') as datafile:
    
 # Compute the wind chill temperature
 def compute_windchill(t, v):
-	a = 35.74
-	b = 0.6215
-	c = 35.75
-	d = 0.4275
+	#a = 35.74
+	#b = 0.6215
+	#c = 35.75
+	#d = 0.4275
 
-	v2 = v ** 2
-	wci = a + (b * t) - (c * v2) + (d * t * v2)
+	#v2 = v ** 2
+	#wci = a + (b * t) - (c * v2) + (d * t * v2)
+	wci = t - 0.7 * v
 	return wci
    
 # Compute the wind chill factor
@@ -43,6 +45,8 @@ windchill = []
 for temp, windspeed in zip(data['tempout'], data['windspeed']):
    windchill.append(compute_windchill(temp, windspeed))
    
-# DEBUG
-print(windchill)
-  
+# DEBUG: f'' strings are a special symbol to allow you to format your string output
+#   .5f means 5 digits to the right of the decimal point
+#   can actually compute values within the curly brackets (in this case, the difference)
+for wc_data, wc_comp in zip(data['windchill'], windchill):
+   print(f'{wc_data:.5f}   {wc_comp:.5f}   {wc_data - wc_comp:.5f}')  
