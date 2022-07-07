@@ -44,9 +44,16 @@ def compute_windchill(t, v):
 windchill = []
 for temp, windspeed in zip(data['tempout'], data['windspeed']):
    windchill.append(compute_windchill(temp, windspeed))
-   
-# DEBUG: f'' strings are a special symbol to allow you to format your string output
+  
+# Output comparison of data 
+# f'' strings are a special symbol to allow you to format your string output
 #   .5f means 5 digits to the right of the decimal point
 #   can actually compute values within the curly brackets (in this case, the difference)
-for wc_data, wc_comp in zip(data['windchill'], windchill):
-   print(f'{wc_data:.5f}   {wc_comp:.5f}   {wc_data - wc_comp:.5f}')  
+print('                   ORIGINAL     ESTIMATED              ')
+print('  DATE    TIME     WINDCHILL    WINDCHILL    DIFFERENCE')
+print('------   -----     ---------    ---------    ----------')
+zip_data = zip(data['date'],data['time'],data['windchill'],windchill)
+for date, time, wc_data, wc_comp in zip_data:
+    wc_diff = wc_data - wc_comp
+    print(f'{date}   {time:>6}   {wc_data:9.6f}    {wc_comp:9.6f}    {wc_diff:10.6f}') 
+    
